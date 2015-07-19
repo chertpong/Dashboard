@@ -22,42 +22,60 @@
                         </div>
 
                         <!-- Statistics start here -->
-                        <div class="panel panel-default col-xs-12 col-md-4">
-                            <div class="panel-heading">Number of avoidance attempts</div>
-                            <div class="panel-body">
-                                <div id="avoid"></div>
+                        <div class="row row-eq-height visible-md visible-lg">
+                            <div class="panel panel-default col-xs-12 col-md-4">
+                                <div class="panel-heading">Score</div>
+                                <div class="panel-body rating-score panel-height">
+                                    <div id="div-rating-score" class="col-xs-offset-1">
+                                        <input id="rating-score" class="rating" data-size="lg" data-symbol="&#xf005;"
+                                               data-show-clear="false" data-glyphicon="false"
+                                               data-rating-class="rating-fa" disabled>
+                                        <span id="score-caption"></span>
+                                    </div>
+                                    <div class="row">
+                                        <h4 class="col-xs-offset-1">Your score: <strong>{{$score}}</strong>/1,200,000</h4>
+                                        <h5 class="col-xs-offset-1">Maximum Bonus : x10</h5>
+                                    </div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="panel panel-default col-xs-12 col-md-4">
-                            <div class="panel-heading">Average speed of attempts</div>
-                            <div class="panel-body">
-                                <div id="speed"></div>
+                            <div class="panel panel-default col-xs-12 col-md-4">
+                                <div class="panel-heading">Number of avoidance attempts</div>
+                                <div class="panel-body panel-height">
+                                    <div id="angle"></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="panel panel-default col-xs-12 col-md-4">
-                            <div class="panel-heading">Number of avoidance attempts</div>
-                            <div class="panel-body">
-                                <div id="angle"></div>
+                            <div class="panel panel-default col-xs-12 col-md-4">
+                                <div class="panel-heading">Average speed of attempts</div>
+                                <div class="panel-body panel-height">
+                                    <div id="speed"></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="panel panel-default col-xs-12 col-md-4">
-                            <div class="panel-heading">Time of activity</div>
-                            <div class="panel-body">
-                                <div id="timeac"></div>
+                        </div><!--row equal height-->
+                        <div class="row row-eq-height visible-md visible-lg">
+                            <div class="panel panel-default col-xs-12 col-md-4">
+                                <div class="panel-heading">Time of activity</div>
+                                <div class="panel-body panel-height">
+                                    <div class="odometer col-xs-offset-3">0</div>
+                                    <div id="timeDescription" class="description col-xs-offset-3">
+                                        <h4>Time usage: </h4>
+                                    </div>
+                                    {{--<div id="timeac"></div>--}}
+                                </div>
                             </div>
-                        </div>
-                        <div class="panel panel-default col-xs-12 col-md-4">
-                            <div class="panel-heading">Estimated distance of head movement</div>
-                            <div class="panel-body">
-                                <div id="distance"></div>
+                            <div class="panel panel-default col-xs-12 col-md-4">
+                                <div class="panel-heading">Estimated distance of head movement</div>
+                                <div class="panel-body panel-height">
+                                    <div id="distance"></div>
+                                </div>
                             </div>
-                        </div>
-                        <div class="panel panel-default col-xs-12 col-md-4">
-                            <div class="panel-heading">Calories</div>
-                            <div class="panel-body">
-                                <div id="calories"></div>
+                            <div class="panel panel-default col-xs-12 col-md-4">
+                                <div class="panel-heading">Calories</div>
+                                <div class="panel-body panel-height col-xs-offset-3">
+                                    <h4 id="calories-value"></h4>
+                                    {{--<div id="calories"></div>--}}
+                                </div>
                             </div>
-                        </div>
+                        </div><!--row equal height-->
                 </div>
             </div>
         </div> <!--div row-->
@@ -107,14 +125,14 @@
         {{--justgauge script--}}
         var avoid, speed, angle, timeac,distance,calories;
         window.onload = function(){
-            var avoid = new JustGage({
-                id: "avoid",
-                value: (avoidDataTotal/avoidData.length).toFixed(2),
-                min: 0,
-                max: 100,
-                title: "Avoid",
-                label: "pounds"
-            });
+//            var avoid = new JustGage({
+//                id: "avoid",
+//                value: (avoidDataTotal/avoidData.length).toFixed(2),
+//                min: 0,
+//                max: 100,
+//                title: "Avoid",
+//                label: "pounds"
+//            });
 
             var speed = new JustGage({
                 id: "speed",
@@ -141,17 +159,17 @@
                 min: 0,
                 max: 100,
                 title: "Angle",
-                label: "degree"
+                label: "percentage"
             });
 
-            var timeac = new JustGage({
-                id: "timeac",
-                value: (timeacDataTotal/timeacData.length).toFixed(2),
-                min: 0,
-                max: 100,
-                title: "Time",
-                label: "s"
-            });
+//            var timeac = new JustGage({
+//                id: "timeac",
+//                value: (timeacDataTotal/timeacData.length).toFixed(2),
+//                min: 0,
+//                max: 100,
+//                title: "Time",
+//                label: "s"
+//            });
 
             var distance = new JustGage({
                 id: "distance",
@@ -162,15 +180,15 @@
                 label: "cm"
             });
 
-            var calories = new JustGage({
-                id: "calories",
-                value: (caloriesDataTotal/caloriesData.length).toFixed(2),
-                min: 0,
-                max: 100,
-                title: "Calories",
-                label: "cal",
-                gaugeWidthScale: 1.2
-            });
+//            var calories = new JustGage({
+//                id: "calories",
+//                value: (caloriesDataTotal/caloriesData.length).toFixed(2),
+//                min: 0,
+//                max: 100,
+//                title: "Calories",
+//                label: "cal",
+//                gaugeWidthScale: 1.2
+//            });
 
 //            setInterval(function() {
 //                avoid.refresh(getRandomInt(50, 100));
@@ -181,5 +199,43 @@
 //                calories.refresh(getRandomInt(0, 50));
 //            }, 2500);
         };
+        <!--Justgauge stop-->
+
+        <!--Star-raing Start-->
+        $("#rating-score").rating({
+            'stars':'3',
+            'min':'0',
+            'max':'3',
+            'starCaptionClasses':{
+                0.5: 'label label-danger',
+                1: 'label label-danger',
+                1.5: 'label label-info',
+                2: 'label label-primary',
+                2.5: 'label label-primary',
+                3: 'label label-success'
+            }
+        });
+        $("#rating-score").rating('update',3);
+
+        <!--Star-raing Stop-->
+
+        <!--Odometer Start-->
+        window.odometerOptions = {
+            format: '(ddd)',
+            duration: 2000,
+            animation: 'count'
+        };
+        setTimeout(
+            function(){
+                $('.odometer').html(192);
+            }
+        ,200);
+        setTimeout(function () {
+            $('#timeDescription > h4').append("192s");
+        },2200)
+        <!--Odometer Stop-->
+
+        <!--Custom-->
+        $('#calories-value').text((caloriesDataTotal).toFixed(2)+' calories');
     </script>
 @endsection

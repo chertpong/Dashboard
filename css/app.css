@@ -5994,4 +5994,18 @@ button.close {
 #dashboard-activity-dropdown {
   margin-bottom: 20px; }
 
+#calories-value {
+  font-size: 60px; }
+
+.row-eq-height {
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex; }
+
+.odometer {
+  font-size: 60px; }
+
+.rating-score {
+  height: 185px; }
+
 /*# sourceMappingURL=app.css.map */
