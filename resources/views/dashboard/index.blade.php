@@ -1,7 +1,7 @@
 @extends('app')
 
 @section('content')
-    <div class="container-fluid">
+    <div class="container">
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="panel panel-default">
@@ -75,7 +75,7 @@
                             </div>
                             <div class="panel panel-default col-xs-12 col-md-4">
                                 <div class="panel-heading">Calories</div>
-                                <div class="panel-body panel-height col-xs-offset-3">
+                                <div class="panel-body panel-height col-xs-offset-1">
                                     <h4 id="calories-value"></h4>
                                     {{--<div id="calories"></div>--}}
                                 </div>
