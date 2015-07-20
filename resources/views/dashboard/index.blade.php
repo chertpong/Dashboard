@@ -235,7 +235,7 @@
 
         <!--Custom-->
         $('#calories-value').text((caloriesDataTotal).toFixed(2)+' calories');
-        $('#score-text').text((scoreTotal/scoreData.length).toFixed(2)+' /'{{$maxScore}});
+        $('#score-text').text(((scoreTotal/scoreData.length).toFixed(2))+'/');
 
         {{--add data to activity dropdown--}}
         @foreach($dropdownMenuData as $element)
