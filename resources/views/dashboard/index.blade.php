@@ -33,7 +33,7 @@
                                         <span id="score-caption"></span>
                                     </div>
                                     <div class="row">
-                                        <h4 class="col-xs-offset-1">Your score: <strong id="score-text"></strong>{{$maxScore}}</h4>
+                                        <h4 class="col-xs-offset-1">Your score: <strong id="score-text">0</strong>{{$maxScore}}</h4>
                                         <h5 class="col-xs-offset-1">Maximum Bonus : x10</h5>
                                     </div>
                                 </div>
@@ -235,7 +235,7 @@
 
         <!--Custom-->
         $('#calories-value').text((caloriesDataTotal).toFixed(2)+' calories');
-        $('#score-text').text((scoreTotal/scoreData.length).toFixed(2));
+        $('#score-text').text((scoreTotal/scoreData.length).toFixed(2)+' /'{{$maxScore}});
 
         {{--add data to activity dropdown--}}
         @foreach($dropdownMenuData as $element)
