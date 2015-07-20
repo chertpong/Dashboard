@@ -213,7 +213,7 @@
                 3: 'label label-success'
             }
         });
-        $("#rating-score").rating('update',3);
+        $("#rating-score").rating('update',(scoreTotal/400000).toFixed(0));
 
         <!--Star-raing Stop-->
 
