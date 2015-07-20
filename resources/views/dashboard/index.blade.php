@@ -92,7 +92,7 @@
         var caloriesData = [];
         var scoreData = [];
 
-        @if($gameData->is_array)
+        @if(is_array($gameData))
             @foreach($gameData as $element)
             avoidData.push({{$element->avoid}});
             speedData.push({{$element->speed}});
