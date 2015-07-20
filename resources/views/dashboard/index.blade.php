@@ -75,7 +75,7 @@
                             </div>
                             <div class="panel panel-default col-xs-12 col-md-4">
                                 <div class="panel-heading">Calories</div>
-                                <div class="panel-body panel-height col-xs-offset-1">
+                                <div class="panel-body panel-height col-xs-offset-2">
                                     <h4 id="calories-value"></h4>
                                     {{--<div id="calories"></div>--}}
                                 </div>
@@ -242,9 +242,24 @@
         $('#score-text').text(((scoreTotal/scoreData.length).toFixed(2))+'/');
 
         {{--add data to activity dropdown--}}
+        var dropdownList = [];
         @foreach($dropdownMenuData as $element)
-            $("#dashboard-activity-dropdown > ul").append("<li><a href={{url('dashboard/activity/id').'/'.$element->id}}>{{$element->create_date}}</a></li>");
+            var e = new Object();
+            e = {
+                id: "{{$element->id}}",
+                create_date: "{{$element->create_date}}"
+            };
+            dropdownList.push(e);
         @endforeach
+        dropdownList.reverse();
+        dropdownList.forEach(function(e,i,a){
+            console.log(e);
+            $("#dashboard-activity-dropdown > ul").append('<li><a href="'+'activity/id/'+e.id+'">'+ e.create_date+'</a></li>');
+        });
+        {{--@foreach($dropdownMenuData as $element)--}}
+            {{--$("#dashboard-activity-dropdown > ul").append("<li><a href={{url('dashboard/activity/id').'/'.$element->id}}>{{$element->create_date}}</a></li>");--}}
+        {{--@endforeach--}}
+
         <!--Add data to avoidance attempts-->
         var rightAvoidData = [];
         var leftAvoidData = [];
