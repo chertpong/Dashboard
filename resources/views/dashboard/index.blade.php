@@ -254,7 +254,7 @@
         dropdownList.reverse();
         dropdownList.forEach(function(e,i,a){
             console.log(e);
-            $("#dashboard-activity-dropdown > ul").append('<li><a href="'+'activity/id/'+e.id+'">'+ e.create_date+'</a></li>');
+            $("#dashboard-activity-dropdown > ul").append('<li><a href="'+'dashboard/activity/id/'+e.id+'">'+ e.create_date+'</a></li>');
         });
         {{--@foreach($dropdownMenuData as $element)--}}
             {{--$("#dashboard-activity-dropdown > ul").append("<li><a href={{url('dashboard/activity/id').'/'.$element->id}}>{{$element->create_date}}</a></li>");--}}
