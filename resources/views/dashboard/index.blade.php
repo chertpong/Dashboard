@@ -92,15 +92,15 @@
         var caloriesData = [];
         var scoreData = [];
 
-        @if(is_array($gameData))
+        @if($gameDataIsArray)
             @foreach($gameData as $element)
-            avoidData.push({{$element->avoid}});
-            speedData.push({{$element->speed}});
-            angleData.push({{$element->allDegreeAngle}});
-            timeacData.push({{$element->time}});
-            distanceData.push({{$element->distance}});
-            caloriesData.push({{$element->calories}});
-            scoreData.push({{$element->score}});
+                avoidData.push({{$element->avoid}});
+                speedData.push({{$element->speed}});
+                angleData.push({{$element->allDegreeAngle}});
+                timeacData.push({{$element->time}});
+                distanceData.push({{$element->distance}});
+                caloriesData.push({{$element->calories}});
+                scoreData.push({{$element->score}});
             @endforeach
         @else
             avoidData.push({{$gameData->avoid}});
