@@ -7,7 +7,7 @@
     <title>Game dashboard prototype</title>
     <!-- TODO: change title and css location -->
     <link media="all" type="text/css" rel="stylesheet" href={{url('css/app.css')}}>
-    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+    <link media="all" type="text/css" rel="stylesheet" href={{url('css/font-awesome.min.css')}}>
     <!-- Fonts -->
     <link href='//fonts.googleapis.com/css?family=Roboto:400,300' rel='stylesheet' type='text/css'>
 
