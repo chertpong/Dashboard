@@ -33,7 +33,7 @@
                                         <span id="score-caption"></span>
                                     </div>
                                     <div class="row">
-                                        <h4 class="col-xs-offset-1">Your score: <strong>{{$score}}</strong>/1,200,000</h4>
+                                        <h4 class="col-xs-offset-1">Your score: <strong id="score-text"></strong>{{$maxScore}}</h4>
                                         <h5 class="col-xs-offset-1">Maximum Bonus : x10</h5>
                                     </div>
                                 </div>
@@ -86,7 +86,7 @@
         {{--add data to activity dropdown--}}
         @foreach($dropdownMenuData as $element)
             @if($element->type==0)
-                $("#dashboard-activity-dropdown > ul").append("<li><a href={{url('dashboard/activity/date').'/'.$element->create_date}}>{{$element->create_date}}</a></li>");
+                $("#dashboard-activity-dropdown > ul").append("<li><a href={{url('dashboard/activity/id').'/'.$element->id}}>{{$element->create_date}}</a></li>");
             @endif
         @endforeach
 
@@ -97,21 +97,16 @@
         var timeacData = [];
         var distanceData = [];
         var caloriesData = [];
+        var scoreData = [];
 
         @foreach($gameData as $element)
-            @if($element->type == 0)
-                avoidData.push({{$element->data}});
-            @elseif($element->type == 1)
-                speedData.push({{$element->data}});
-            @elseif($element->type == 2)
-                angleData.push({{$element->data}});
-            @elseif($element->type == 3)
-                timeacData.push({{$element->data}});
-            @elseif($element->type == 4)
-                distanceData.push({{$element->data}});
-            @elseif($element->type == 5)
-                caloriesData.push({{$element->data}});
-            @endif
+            avoidData.push({{$element->avoid}});
+            speedData.push({{$element->speed}});
+            angleData.push({{$element->allDegreeAngle}});
+            timeacData.push({{$element->time}});
+            distanceData.push({{$element->distance}});
+            caloriesData.push({{$element->calories}});
+            scoreData.push({{$element->score}});
         @endforeach
 
         var avoidDataTotal =  avoidData.reduce(function(a,b){return a+b;});
@@ -120,7 +115,7 @@
         var timeacDataTotal = timeacData.reduce(function(a,b){return a+b;});
         var distanceDataTotal = distanceData.reduce(function(a,b){return a+b;});
         var caloriesDataTotal = caloriesData.reduce(function(a,b){return a+b;});
-
+        var scoreTotal = scoreData.reduce(function(a,b){ return a+b});
 
         {{--justgauge script--}}
         var avoid, speed, angle, timeac,distance,calories;
@@ -227,15 +222,16 @@
         };
         setTimeout(
             function(){
-                $('.odometer').html(192);
+                $('.odometer').html((timeacDataTotal/timeacData.length).toFixed(2));
             }
         ,200);
         setTimeout(function () {
-            $('#timeDescription > h4').append("192s");
+            $('#timeDescription > h4').append((timeacDataTotal/timeacData.length).toFixed(2));
         },2200)
         <!--Odometer Stop-->
 
         <!--Custom-->
         $('#calories-value').text((caloriesDataTotal).toFixed(2)+' calories');
+        $('#score-text').text((scoreTotal/scoreData.length).toFixed(2));
     </script>
 @endsection

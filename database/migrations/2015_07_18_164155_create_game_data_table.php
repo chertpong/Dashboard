@@ -14,8 +14,20 @@ class CreateGameDataTable extends Migration
     {
         Schema::create('game_data', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('type');
-            $table->double('data');
+            $table->string('name');
+            $table->string('numPass');
+            $table->integer('numLive');
+            $table->double('allDegreeAngle');
+            $table->double('distanceHead');
+            $table->double('degreeSed');
+            $table->double('averageVelocity');
+            $table->string('hash',1024);
+            $table->double('score');
+            $table->double('avoid');
+            $table->double('speed');
+            $table->double('time');
+            $table->double('distance');
+            $table->double('calories');
             $table->timestamp('create_date');
         });
     }

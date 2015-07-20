@@ -18,13 +18,18 @@ class DashboardController extends Controller{
         $this->middleware('auth');
     }
     public function index(){
-        $score = 1200000;
+        $maxScore = 1200000;
         $gameData = GameData::all();
-        return view('dashboard.index',['gameData'=>$gameData,'dropdownMenuData'=>$gameData,'score'=>$score]);
+        return view('dashboard.index',['gameData'=>$gameData,'dropdownMenuData'=>$gameData,'maxScore'=>$maxScore]);
     }
     public function getByDate($date){
-        $score = 1200000;
+        $maxScore = 1200000;
         $gameData = GameData::whereDate('create_date','=',$date)->get();
-        return view('dashboard.index',['gameData'=>$gameData,'dropdownMenuData'=>GameData::all(),'score'=>$score]);
+        return view('dashboard.index',['gameData'=>$gameData,'dropdownMenuData'=>GameData::all(),'maxScore'=>$maxScore]);
+    }
+    public function getById($id){
+        $maxScore = 1200000;
+        $gameData = GameData::find($id);
+        return view('dashboard.index',['gameData'=>$gameData,'dropdownMenuData'=>GameData::all(),'maxScore'=>$maxScore]);
     }
 }

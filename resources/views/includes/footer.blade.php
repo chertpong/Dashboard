@@ -17,6 +17,6 @@
     <script src={{url('js/odometer.min.js')}}></script>
 
     <p align="center">Footer area</p>
-    <p align="center">powered by Laravel 5.1 and using justgage.com's javascript lib </p>
+    <p align="center">powered by Laravel 5.1 and using justgage,odometer and bootstrap-star lib </p>
     @yield('footer')
 </footer>
