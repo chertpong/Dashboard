@@ -5,7 +5,7 @@
         <div class="row">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading">Game statistics</div>
+                    <div class="panel-heading"><i class="fa fa-2x fa-bar-chart">Game statistics</i></div>
                     <div class="panel-body">
                         <div id="dashboard-activity-dropdown" class="dropdown">
                             <button class="btn btn-default dropdown-toggle" type="button" id="activity-dropdown-menu-btn" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
@@ -41,7 +41,12 @@
                             <div class="panel panel-default col-xs-12 col-md-4">
                                 <div class="panel-heading">Number of avoidance attempts</div>
                                 <div class="panel-body panel-height">
-                                    <div id="angle"></div>
+                                    <strong id="rightAvoidText">Number of avoidance right: </strong> <br>
+                                    <strong id="leftAvoidText">Number of avoidance left: </strong> <br>
+                                    <strong id="downAvoidText">Number of avoidance bend down: </strong> <br>
+                                    <strong id="degreeOfTiltRightText">Maximum head tilt  of right: </strong> <br>
+                                    <strong id="degreeOfTiltLeftText">Maximum head tilt of left: </strong> <br>
+                                    {{--<div id="angle"></div>--}}
                                 </div>
                             </div>
                             <div class="panel panel-default col-xs-12 col-md-4">
@@ -112,7 +117,7 @@
             scoreData.push({{$gameData->score}});
         @endif
 
-                var avoidDataTotal =  avoidData.reduce(function(a,b){return a+b;});
+        var avoidDataTotal =  avoidData.reduce(function(a,b){return a+b;});
         var speedDataTotal = speedData.reduce(function(a,b){return a+b;});
         var angleDataTotal = angleData.reduce(function(a,b){return a+b;});
         var timeacDataTotal = timeacData.reduce(function(a,b){return a+b;});
@@ -151,14 +156,14 @@
                 refreshAnimationType: "bounce"
             });
 
-            var angle = new JustGage({
-                id: "angle",
-                value: (angleDataTotal/angleData.length).toFixed(2),
-                min: 0,
-                max: 100,
-                title: "Angle",
-                label: "percentage"
-            });
+//            var angle = new JustGage({
+//                id: "angle",
+//                value: (angleDataTotal/angleData.length).toFixed(2),
+//                min: 0,
+//                max: 100,
+//                title: "Angle",
+//                label: "percentage"
+//            });
 
 //            var timeac = new JustGage({
 //                id: "timeac",
@@ -204,16 +209,15 @@
             'stars':'3',
             'min':'0',
             'max':'3',
-            'starCaptionClasses':{
-                0.5: 'label label-danger',
-                1: 'label label-danger',
-                1.5: 'label label-info',
-                2: 'label label-primary',
-                2.5: 'label label-primary',
-                3: 'label label-success'
+            'starCaptionClasses':function(val){
+                if(val<=0.5){ return 'label label-danger'}
+                else if(val<=1){ return 'label label-warning'}
+                else if(val<=1.5){ return 'label label-info'}
+                else if(val<=2.5){ return 'label label-primary'}
+                else{ return 'label label-success'}
             }
         });
-        $("#rating-score").rating('update',(scoreTotal/400000).toFixed(0));
+        $("#rating-score").rating('update',((scoreTotal/400000)/scoreData.length).toFixed(1));
 
         <!--Star-raing Stop-->
 
@@ -239,9 +243,39 @@
 
         {{--add data to activity dropdown--}}
         @foreach($dropdownMenuData as $element)
-        @if($element->type==0)
-        $("#dashboard-activity-dropdown > ul").append("<li><a href={{url('dashboard/activity/id').'/'.$element->id}}>{{$element->create_date}}</a></li>");
-        @endif
+            $("#dashboard-activity-dropdown > ul").append("<li><a href={{url('dashboard/activity/id').'/'.$element->id}}>{{$element->create_date}}</a></li>");
         @endforeach
+        <!--Add data to avoidance attempts-->
+        var rightAvoidData = [];
+        var leftAvoidData = [];
+        var downAvoidData = [];
+        var degreeTiltRightData = [];
+        var degreeTiltLeftData = [];
+        @if($gameDataIsArray)
+            @foreach($gameData as $element)
+                rightAvoidData.push({{$element->rightAvoid}});
+                leftAvoidData.push({{$element->leftAvoid}});
+                downAvoidData.push({{$element->downAvoid}});
+                degreeTiltRightData.push({{$element->degreeTiltRight}});
+                degreeTiltLeftData.push({{$element->degreeTiltLeft}});
+            @endforeach
+        @else
+            rightAvoidData.push({{$gameData->rightAvoid}});
+            leftAvoidData.push({{$gameData->leftAvoid}});
+            downAvoidData.push({{$gameData->downAvoid}});
+            degreeTiltRightData.push({{$gameData->degreeTiltRight}});
+            degreeTiltLeftData.push({{$gameData->degreeTiltLeft}});
+        @endif
+        var rightAvoidTotal = rightAvoidData.reduce(function(a,b){ return a+b;});
+        var leftAvoidTotal = leftAvoidData.reduce(function(a,b){ return a+b});
+        var downAvoidTotal = downAvoidData.reduce(function(a,b){ return a+b});
+        var degreeTiltRightTotal = degreeTiltRightData.reduce(function(a,b){ return a+b});
+        var degreeTiltLeftTotal = degreeTiltLeftData.reduce(function(a,b){ return a+b});
+
+        $("#rightAvoidText").append((rightAvoidTotal/rightAvoidData.length).toFixed(2));
+        $("#leftAvoidText").append((leftAvoidTotal/leftAvoidData.length).toFixed(2));
+        $("#downAvoidText").append((downAvoidTotal/downAvoidData.length).toFixed(2));
+        $("#degreeOfTiltRightText").append((degreeTiltRightTotal/degreeTiltRightData.length).toFixed(2));
+        $("#degreeOfTiltLeftText").append((degreeTiltLeftTotal/degreeTiltLeftData.length).toFixed(2));
     </script>
 @endsection

@@ -35,6 +35,15 @@ $factory->define(App\GameData::class, function($faker){
     'time' => $faker->randomFloat(2,0,100),
     'distance' => $faker->randomFloat(2,0,100),
     'calories' => $faker->randomFloat(2,0,100),
+    'tomatoesWasted' => $faker->randomFloat(2,0,100),
+    'tomatoesAvoided' => $faker->randomFloat(2,0,100),
+    'rightAvoid' => $faker->randomFloat(2,0,100),
+    'leftAvoid' => $faker->randomFloat(2,0,100),
+    'downAvoid' => $faker->randomFloat(2,0,100),
+    'degreeTiltRight' => $faker->randomFloat(2,0,100),
+    'degreeTiltLeft' => $faker->randomFloat(2,0,100),
+    'distanceHeadMoved' => $faker->randomFloat(2,0,100),
+    'averageVelocityHeadMoved' => $faker->randomFloat(2,0,100),
     'create_date' => $faker->dateTimeThisMonth('now'),
    ];
 });

@@ -28,6 +28,15 @@ class CreateGameDataTable extends Migration
             $table->double('time');
             $table->double('distance');
             $table->double('calories');
+            $table->double('tomatoesWasted');
+            $table->double('tomatoesAvoided');
+            $table->double('rightAvoid');
+            $table->double('leftAvoid');
+            $table->double('downAvoid');
+            $table->double('degreeTiltRight');
+            $table->double('degreeTiltLeft');
+            $table->double('distanceHeadMoved');
+            $table->double('averageVelocityHeadMoved');
             $table->timestamp('create_date');
         });
     }
