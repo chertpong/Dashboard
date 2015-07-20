@@ -55,7 +55,7 @@
                             <div class="panel panel-default col-xs-12 col-md-4">
                                 <div class="panel-heading">Time of activity</div>
                                 <div class="panel-body panel-height">
-                                    <div class="odometer col-xs-offset-3">0</div>
+                                    <div class="odometer col-xs-offset-2">0</div>
                                     <div id="timeDescription" class="description col-xs-offset-3">
                                         <h4>Time usage: </h4>
                                     </div>
@@ -83,13 +83,6 @@
 @endsection
 @section('footer')
     <script>
-        {{--add data to activity dropdown--}}
-        @foreach($dropdownMenuData as $element)
-            @if($element->type==0)
-                $("#dashboard-activity-dropdown > ul").append("<li><a href={{url('dashboard/activity/id').'/'.$element->id}}>{{$element->create_date}}</a></li>");
-            @endif
-        @endforeach
-
         {{-- load all data to vars--}}
         var avoidData = [];
         var speedData = [];
@@ -99,7 +92,8 @@
         var caloriesData = [];
         var scoreData = [];
 
-        @foreach($gameData as $element)
+        @if($gameData->is_array)
+            @foreach($gameData as $element)
             avoidData.push({{$element->avoid}});
             speedData.push({{$element->speed}});
             angleData.push({{$element->allDegreeAngle}});
@@ -107,9 +101,18 @@
             distanceData.push({{$element->distance}});
             caloriesData.push({{$element->calories}});
             scoreData.push({{$element->score}});
-        @endforeach
+            @endforeach
+        @else
+            avoidData.push({{$gameData->avoid}});
+            speedData.push({{$gameData->speed}});
+            angleData.push({{$gameData->allDegreeAngle}});
+            timeacData.push({{$gameData->time}});
+            distanceData.push({{$gameData->distance}});
+            caloriesData.push({{$gameData->calories}});
+            scoreData.push({{$gameData->score}});
+        @endif
 
-        var avoidDataTotal =  avoidData.reduce(function(a,b){return a+b;});
+                var avoidDataTotal =  avoidData.reduce(function(a,b){return a+b;});
         var speedDataTotal = speedData.reduce(function(a,b){return a+b;});
         var angleDataTotal = angleData.reduce(function(a,b){return a+b;});
         var timeacDataTotal = timeacData.reduce(function(a,b){return a+b;});
@@ -216,7 +219,7 @@
 
         <!--Odometer Start-->
         window.odometerOptions = {
-            format: '(ddd)',
+            format: '(ddd).dd',
             duration: 2000,
             animation: 'count'
         };
@@ -233,5 +236,12 @@
         <!--Custom-->
         $('#calories-value').text((caloriesDataTotal).toFixed(2)+' calories');
         $('#score-text').text((scoreTotal/scoreData.length).toFixed(2));
+
+        {{--add data to activity dropdown--}}
+        @foreach($dropdownMenuData as $element)
+        @if($element->type==0)
+        $("#dashboard-activity-dropdown > ul").append("<li><a href={{url('dashboard/activity/id').'/'.$element->id}}>{{$element->create_date}}</a></li>");
+        @endif
+        @endforeach
     </script>
 @endsection
