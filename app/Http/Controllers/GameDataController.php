@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Symfony\Component\HttpFoundation\Response;
 
 class GameDataController extends Controller
 {
@@ -42,6 +43,6 @@ class GameDataController extends Controller
         $gameData->create_date = (Carbon::now());
 
         $gameData->save();
-        return 'success';
+        return new Response("success",200);
     }
 }
