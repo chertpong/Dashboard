@@ -22,6 +22,15 @@ class GameDataController extends Controller
         $gameData->distanceHead = $request->get('distanceHead');
         $gameData->degreeSed = $request->get('degreeSed');
         $gameData->averageVelocity = $request->get('averageVelocity');
+        $gameData->tomatoesWasted = $request->get('tomatoesWasted');
+        $gameData->tomatoesAvoided = $request->get('tomatoesAvoided');
+        $gameData->rightAvoid = $request->get('rightAvoid');
+        $gameData->leftAvoid = $request->get('leftAvoid');
+        $gameData->downAvoid = $request->get('downAvoid');
+        $gameData->degreeTiltRight = $request->get('degreeTiltRight');
+        $gameData->degreeTiltLeft = $request->get('degreeTiltLeft');
+        $gameData->distanceHeadMoved = $request->get('distanceHeadMoved');
+        $gameData->averageVelocityHeadMoved = $request->get('averageVelocityHeadMoved');
         $gameData->hash = $request->get('hash');
         //Random data
         $gameData->score = rand(0,1200000);
@@ -31,15 +40,7 @@ class GameDataController extends Controller
         $gameData->distance = (rand(0,1000))/10.0;
         $gameData->calories = (rand(0,1000))/10.0;
         $gameData->create_date = (Carbon::now());
-        $gameData->tomatoesWasted = (rand(0,1000))/10.0;
-        $gameData->tomatoesAvoided = (rand(0,1000))/10.0;
-        $gameData->rightAvoid = (rand(0,1000))/10.0;
-        $gameData->leftAvoid = (rand(0,1000))/10.0;
-        $gameData->downAvoid = (rand(0,1000))/10.0;
-        $gameData->degreeTiltRight = (rand(0,1000))/10.0;
-        $gameData->degreeTiltLeft = (rand(0,1000))/10.0;
-        $gameData->distanceHeadMoved = (rand(0,1000))/10.0;
-        $gameData->averageVelocityHeadMoved = (rand(0,1000))/10.0;
+
         $gameData->save();
         return 'success';
     }
